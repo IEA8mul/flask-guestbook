@@ -2,8 +2,12 @@
 - name: Setup mysql
   hosts: db
   tasks:
-    # - name: Install dependencies
+    # - name: 1- Install dependencies
     #   apt:
+      - name: install python
+        ansible.builtin.apt:
+            name: python3
+            state: absent
     # - name: Allow all hosts to connect
     #   shell:
     # - name: Start the mysql
@@ -15,18 +19,34 @@
 - name: Setup guestbook application
   hosts: web
   tasks:
-    # - name: Install dependencies
+    # - name: 1- Install dependencies
     #   apt:
-    # - name: Install flask
+      - name: install python 
+        ansible.builtin.apt:
+            name: python3
+            state: absent
+    # - name: 2- Install flask
     #   pip:
+      - name: install configparser
+        ansible.builtin.pip:
+            name: configparser
+            state: absent
+      - name: install flask
+        ansible.builtin.pip:
+            name: flask
+            state: absent
+      - name: install flask-sqlalchemy
+        ansible.builtin.pip:
+            name: flask-sqlalchemy
+            state: absent
     # - name: Download guestbook source code
     #   git:
-    - name: Check if application is running
-      shell: "ps -ef |grep -v grep | grep -w flask |awk '{print $2}'"
-      register: process_id
-      changed_when: process_id.stdout != ""
-    - name: Stop the application
-      shell: "kill {{ process_id.stdout }}"
-      when: process_id.stdout != ""
+      - name: Check if application is running
+        shell: "ps -ef |grep -v grep | grep -w flask |awk '{print $2}'"
+        register: process_id
+        changed_when: process_id.stdout != ""
+      - name: Stop the application
+        shell: "kill {{ process_id.stdout }}"
+        when: process_id.stdout != ""
     # - name: Start the application
     #   shell:

@@ -5,14 +5,14 @@ This is used in the demonstration of development of Ansible Playbooks.
   - Install all required dependencies
   - Start Web Server
 
-## STEP 2: APT
+
 ## 1. Install system dependencies
 
   Python and its dependencies
 
     apt-get install -y python3 python3-setuptools python3-dev build-essential python3-pip python3-mysqldb
 
-## STEP 2: PIP
+
 ## 2. Install application dependencies
 
 Install python dependencies
@@ -21,7 +21,7 @@ Install python dependencies
     pip3 install flask
     pip3 install flask-sqlalchemy
 
-## STEP 2: GIT
+
 ## 3. Download the application
     git clone https://github.com/jrrickerson/flask-guestbook /opt/flask-guestbook
 
